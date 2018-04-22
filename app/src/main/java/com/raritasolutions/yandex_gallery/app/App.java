@@ -19,7 +19,6 @@ public class App extends Application
     private static App instance = null;
     // Сами компоненты
     private AppComponent appComponent;
-    private ImageListComponent imageListComponent;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,7 +26,6 @@ public class App extends Application
                 .builder()
                 .appModule(new AppModule(this.getApplicationContext()))
                 .build();
-        imageListComponent = appComponent.imageListComponent(new ImageListModule());
         instance = this;
     }
 
@@ -39,9 +37,5 @@ public class App extends Application
     // Getter-ы компонентов
     public AppComponent getAppComponent() {
         return appComponent;
-    }
-
-    public ImageListComponent getImageListComponent() {
-        return imageListComponent;
     }
 }

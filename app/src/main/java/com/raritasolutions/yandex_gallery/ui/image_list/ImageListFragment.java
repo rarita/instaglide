@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import com.hannesdorfmann.mosby3.mvp.MvpFragment;
 import com.raritasolutions.yandex_gallery.R;
 import com.raritasolutions.yandex_gallery.app.App;
+import com.raritasolutions.yandex_gallery.di.ImageListModule;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -28,7 +31,7 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     ImageListAdapter imageListAdapter;
 
     public ImageListFragment() {
-        App.getInstance().getImageListComponent().inject(this);
+        App.getInstance().getAppComponent().imageListComponent(new ImageListModule()).inject(this);
     }
 
     @Override
@@ -51,13 +54,19 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.setAdapter(imageListAdapter);
+            recyclerView.setHasFixedSize(true);
         }
         return view;
     }
 
     @Override
-    public void updateData() {
+    public void updateData(List<String> images) {
 
+        if (imageListAdapter != null)
+        {
+            imageListAdapter.setItems(images);
+            imageListAdapter.notifyDataSetChanged();
+        }
     }
 
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.raritasolutions.yandex_gallery.app.Constants;
+import com.raritasolutions.yandex_gallery.app.Utils;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -33,5 +35,9 @@ public class AppModule {
     @Provides
     @Singleton
     Constants provideConstants() {return new Constants(); }
+    @NonNull
+    @Provides
+    @Singleton
+    Utils provideUtils() {return new Utils(); }
 
 }

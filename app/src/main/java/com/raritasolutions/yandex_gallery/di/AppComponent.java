@@ -10,7 +10,7 @@ import dagger.Component;
 /**
  * Created by rarita on 21.04.18.
  */
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, ApiModule.class, UnscopedModule.class})
 @Singleton
 public interface AppComponent {
     ImageListComponent imageListComponent(ImageListModule imageListModule);
