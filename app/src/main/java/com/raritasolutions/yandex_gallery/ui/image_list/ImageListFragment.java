@@ -29,6 +29,8 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     GridLayoutManager gridLayoutManager;
     @Inject
     ImageListAdapter imageListAdapter;
+    @Inject
+    GridSpacingItemDecoration decoration;
 
     public ImageListFragment() {
         App.getInstance().getAppComponent().imageListComponent(new ImageListModule()).inject(this);
@@ -53,6 +55,7 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(gridLayoutManager);
             recyclerView.setAdapter(imageListAdapter);
+            recyclerView.addItemDecoration(decoration);
             recyclerView.setHasFixedSize(true);
         }
         return view;

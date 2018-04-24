@@ -41,6 +41,12 @@ public class InstaData {
             return standard_resolution;
         }
 
+        public resolution getThumbnail() { return thumbnail; }
+
+        public resolution getLow_resolution() {
+            return low_resolution;
+        }
+
         public class resolution {
             private String url;
             public String getUrl() {

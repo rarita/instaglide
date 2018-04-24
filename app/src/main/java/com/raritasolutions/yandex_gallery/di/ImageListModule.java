@@ -8,10 +8,9 @@ import android.view.LayoutInflater;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
 import com.raritasolutions.yandex_gallery.app.Utils;
+import com.raritasolutions.yandex_gallery.ui.image_list.GridSpacingItemDecoration;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListAdapter;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListPresenterImpl;
-
-import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,7 +34,7 @@ public class ImageListModule {
     @ImageListScope
     GridLayoutManager provideGridLayoutManager(Context context, Constants constants)
     {
-        return new GridLayoutManager(context, constants.columnCount);
+        return new GridLayoutManager(context, constants.COLUMN_COUNT);
     }
     @Provides
     @NonNull
@@ -43,5 +42,12 @@ public class ImageListModule {
     ImageListAdapter provideImageListAdapter(LayoutInflater inflater, Context context, Utils utils)
     {
         return new ImageListAdapter(inflater, context, utils);
+    }
+    @Provides
+    @NonNull
+    @ImageListScope
+    GridSpacingItemDecoration provideGridSpacingItemDecoration(Constants constants)
+    {
+        return new GridSpacingItemDecoration(constants.COLUMN_COUNT,constants.LIST_SPACING,false,0);
     }
 }

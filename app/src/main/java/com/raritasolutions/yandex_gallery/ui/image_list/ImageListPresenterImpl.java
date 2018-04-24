@@ -21,7 +21,7 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
 
     private static final String TAG = ImageListPresenterImpl.class.getSimpleName();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    // Injectable
+    // Это все инжектим
     private RetrofitService retrofitService;
     private Constants constants;
     private Utils utils;
@@ -47,7 +47,7 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
 
     @Override
     public void requestUpdate() {
-        if (isViewAttached())
+        ifViewAttached(__ ->
         {
             compositeDisposable.add(
             retrofitService
@@ -58,5 +58,6 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
                             data -> getView().updateData(utils.mapInstaDataToURIList(data)),
                             error -> Log.i(TAG,error.toString())));
         }
+        );
     }
 }
