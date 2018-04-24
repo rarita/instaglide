@@ -37,7 +37,6 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override

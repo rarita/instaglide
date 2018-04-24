@@ -38,6 +38,6 @@ public class AppModule {
     @NonNull
     @Provides
     @Singleton
-    Utils provideUtils() {return new Utils(); }
+    Utils provideUtils(Constants constants) {return new Utils(constants); }
 
 }

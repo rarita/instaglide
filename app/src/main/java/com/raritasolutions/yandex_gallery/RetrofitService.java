@@ -15,4 +15,6 @@ public interface RetrofitService {
     @GET("v1/tags/{tag_name}/media/recent")
     Observable<InstaResponse> getTagPhotos(@Path("tag_name") String tag_name,
                                            @Query("access_token") String access_token);
+    @GET("v1/users/self/media/recent")
+    Observable<InstaResponse> getUserPhotos(@Query("access_token") String access_token);
 }

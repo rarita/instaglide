@@ -33,16 +33,16 @@ public class InstaData {
 
     public class Images {
 
-        private Standard_resolution standard_resolution;
+        private resolution thumbnail; //150x150
+        private resolution low_resolution; //320x320
+        private resolution standard_resolution; //640x640
 
-        public Standard_resolution getStandard_resolution() {
+        public resolution getStandard_resolution() {
             return standard_resolution;
         }
 
-        public class Standard_resolution {
-
+        public class resolution {
             private String url;
-
             public String getUrl() {
                 return url;
             }

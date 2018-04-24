@@ -51,7 +51,7 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
         {
             compositeDisposable.add(
             retrofitService
-                    .getTagPhotos("nofilter",constants.ACCESS_TOKEN_PUBLIC_SCOPE)
+                    .getUserPhotos(constants.ACCESS_TOKEN_PUBLIC_SCOPE)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(

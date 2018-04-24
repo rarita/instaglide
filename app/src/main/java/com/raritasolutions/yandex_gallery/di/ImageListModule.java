@@ -40,8 +40,8 @@ public class ImageListModule {
     @Provides
     @NonNull
     @ImageListScope
-    ImageListAdapter provideImageListAdapter(LayoutInflater inflater, Context context)
+    ImageListAdapter provideImageListAdapter(LayoutInflater inflater, Context context, Utils utils)
     {
-        return new ImageListAdapter(inflater, context);
+        return new ImageListAdapter(inflater, context, utils);
     }
 }
