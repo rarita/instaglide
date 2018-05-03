@@ -5,8 +5,6 @@ import android.app.Application;
 import com.raritasolutions.yandex_gallery.di.AppComponent;
 import com.raritasolutions.yandex_gallery.di.AppModule;
 import com.raritasolutions.yandex_gallery.di.DaggerAppComponent;
-import com.raritasolutions.yandex_gallery.di.ImageListComponent;
-import com.raritasolutions.yandex_gallery.di.ImageListModule;
 
 
 /**

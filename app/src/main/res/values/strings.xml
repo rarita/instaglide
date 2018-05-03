@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">Yandex_Gallery</string>
+    <string name="app_name">Instaglide</string>
     <string name="action_settings">Settings</string>
+    <string name="default_q">42</string>  <!-- the answer to all questions !-->
+    <string name="default_username">.@username</string>
+    <string name="default_fullname">Ivan</string>
+    <string name="text_posts">posts</string>
+    <string name="text_followers">followers</string>
+    <string name="text_following">following</string>
 </resources>

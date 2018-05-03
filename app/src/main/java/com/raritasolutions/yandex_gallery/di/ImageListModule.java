@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
 import com.raritasolutions.yandex_gallery.app.Utils;
+import com.raritasolutions.yandex_gallery.ui.ToolbarViewHolder;
 import com.raritasolutions.yandex_gallery.ui.image_list.GridSpacingItemDecoration;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListAdapter;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListPresenterImpl;
@@ -49,5 +50,12 @@ public class ImageListModule {
     GridSpacingItemDecoration provideGridSpacingItemDecoration(Constants constants)
     {
         return new GridSpacingItemDecoration(constants.COLUMN_COUNT,constants.LIST_SPACING,false,0);
+    }
+    @Provides
+    @NonNull
+    @ImageListScope
+    ToolbarViewHolder provideToolbarViewHolder(Context context)
+    {
+        return new ToolbarViewHolder(context);
     }
 }

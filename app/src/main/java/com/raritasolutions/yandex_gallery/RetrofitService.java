@@ -1,6 +1,8 @@
 package com.raritasolutions.yandex_gallery;
 
-import com.raritasolutions.yandex_gallery.model.InstaResponse;
+import com.raritasolutions.yandex_gallery.model.InstaData;
+import com.raritasolutions.yandex_gallery.model.LoginData;
+import com.raritasolutions.yandex_gallery.model.Response;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -12,9 +14,12 @@ import retrofit2.http.Query;
  */
 
 public interface RetrofitService {
+    @GET("v1/users/self")
+    Observable<Response<LoginData>> getUserLoginData(@Query("access_token") String access_token);
+
     @GET("v1/tags/{tag_name}/media/recent")
-    Observable<InstaResponse> getTagPhotos(@Path("tag_name") String tag_name,
-                                           @Query("access_token") String access_token);
+    Observable<Response<InstaData[]>> getTagPhotos(@Path("tag_name") String tag_name,
+                                                 @Query("access_token") String access_token);
     @GET("v1/users/self/media/recent")
-    Observable<InstaResponse> getUserPhotos(@Query("access_token") String access_token);
+    Observable<Response<InstaData[]>> getUserPhotos(@Query("access_token") String access_token);
 }

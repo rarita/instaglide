@@ -1,6 +1,7 @@
 package com.raritasolutions.yandex_gallery.ui.image_list;
 
 import com.hannesdorfmann.mosby3.mvp.MvpView;
+import com.raritasolutions.yandex_gallery.model.LoginData;
 
 import java.util.List;
 
@@ -10,4 +11,5 @@ import java.util.List;
 
 public interface ImageListView extends MvpView {
     void updateData(List<String> images);
+    void updateHeader(LoginData loginData);
 }

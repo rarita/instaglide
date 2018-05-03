@@ -14,16 +14,18 @@ import com.raritasolutions.yandex_gallery.app.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.ViewHolder> {
 
-    private List<String> mValues;
+    private static List<String> mValues = new ArrayList<>();
     private Context context;
     private LayoutInflater inflater;
     private int imageDimensions;
 
     public ImageListAdapter(LayoutInflater inflater, Context context, Utils utils) {
-        mValues = new ArrayList<>();
         this.inflater = inflater;
         this.context = context;
         this.imageDimensions = utils.getItemDimensions();
@@ -55,11 +57,12 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.imageView)
         public ImageView image;
 
         public ViewHolder(View view) {
             super(view);
-            image = view.findViewById(R.id.imageView);
+            ButterKnife.bind(this,view);
             image.getLayoutParams().height = imageDimensions;
             image.getLayoutParams().width = imageDimensions;
         }

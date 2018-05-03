@@ -2,9 +2,10 @@ package com.raritasolutions.yandex_gallery.app;
 
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.raritasolutions.yandex_gallery.model.InstaData;
-import com.raritasolutions.yandex_gallery.model.InstaResponse;
+import com.raritasolutions.yandex_gallery.model.Response;
 
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 public class Utils {
+    private final String TAG = Utils.class.getSimpleName();
     private Constants constants;
 
     public Utils(Constants constants)
@@ -23,11 +25,12 @@ public class Utils {
         this.constants = constants;
     }
 
-    public List<String> mapInstaDataToURIList(InstaResponse response)
+    public List<String> mapInstaDataToURIList(Response<InstaData[]> response)
     {
         // стримами это дело организовать не удалось
         // надо обдумать и ещё раз попробовать
         InstaData[] data = response.getData();
+        Log.i(TAG, String.valueOf(data.length));
         List<String> result = new ArrayList<>();
         for (InstaData item:data) {
             result.add(item.getImages().getStandard_resolution().getUrl());

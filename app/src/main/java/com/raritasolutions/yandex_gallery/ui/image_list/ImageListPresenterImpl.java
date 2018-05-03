@@ -9,6 +9,7 @@ import com.raritasolutions.yandex_gallery.app.Utils;
 
 import javax.inject.Inject;
 
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -57,6 +58,12 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
                     .subscribe(
                             data -> getView().updateData(utils.mapInstaDataToURIList(data)),
                             error -> Log.i(TAG,error.toString())));
+            compositeDisposable.add(retrofitService.getUserLoginData(constants.ACCESS_TOKEN_PUBLIC_SCOPE)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            loginDataResponse -> getView().updateHeader(loginDataResponse.getData()),
+                            throwable -> Log.i(TAG,throwable.toString())));
         }
         );
     }

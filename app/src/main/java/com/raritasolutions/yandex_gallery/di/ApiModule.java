@@ -3,6 +3,7 @@ package com.raritasolutions.yandex_gallery.di;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
