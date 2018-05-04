@@ -1,10 +1,9 @@
 package com.raritasolutions.yandex_gallery.ui;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.view.View;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +11,7 @@ import com.bumptech.glide.Glide;
 import com.raritasolutions.yandex_gallery.R;
 import com.raritasolutions.yandex_gallery.model.Counts;
 import com.raritasolutions.yandex_gallery.model.LoginData;
-import com.raritasolutions.yandex_gallery.ui.image_list.GridSpacingItemDecoration;
+import com.raritasolutions.yandex_gallery.ui.image_list.ImageListView;
 
 import javax.inject.Inject;
 
@@ -23,11 +22,16 @@ import butterknife.Unbinder;
 /**
  * Created by rarita on 03.05.18.
  */
-
+// По хорошему сдел
 public class ToolbarViewHolder {
     // Контекст для Glide (инъекция)
     private final Context context;
     private Unbinder unbinder;
+    // Физические тулбары
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    @BindView(R.id.appBarLayout)
+    AppBarLayout appBarLayout;
     // Аватар
     @BindView(R.id.profile_pic)
     ImageView profile_pic;
@@ -48,10 +52,34 @@ public class ToolbarViewHolder {
     public ToolbarViewHolder(Context context) {
         this.context = context;
     }
-
+    // Отсылаем в презентер весточку что можно заливать данные, когда связались с вьюхой.
     public void bind(Activity activity)
     {
-       unbinder = ButterKnife.bind(this, activity);
+        unbinder = ButterKnife.bind(this, activity);
+        // Как только получили заветные биндинги избавляемся от катающегося по всему тулбару тайтла.
+        disableTitleScaling();
+    }
+
+    private void disableTitleScaling()
+    {
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isShow = true;
+            int scrollRange = -1;
+
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbarLayout.setTitle("Title");
+                    isShow = true;
+                } else if(isShow) {
+                    collapsingToolbarLayout.setTitle(" ");
+                    isShow = false;
+                }
+            }
+        });
     }
 
     public boolean isBound()

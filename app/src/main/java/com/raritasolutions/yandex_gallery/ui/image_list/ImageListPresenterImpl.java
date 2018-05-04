@@ -9,7 +9,6 @@ import com.raritasolutions.yandex_gallery.app.Utils;
 
 import javax.inject.Inject;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -21,34 +20,40 @@ import io.reactivex.schedulers.Schedulers;
 public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> implements ImageListPresenter {
 
     private static final String TAG = ImageListPresenterImpl.class.getSimpleName();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     // Это все инжектим
+    private CompositeDisposable compositeDisposable;
     private RetrofitService retrofitService;
     private Constants constants;
     private Utils utils;
 
     @Inject
-    public ImageListPresenterImpl(RetrofitService retrofitService, Constants constants, Utils utils) {
+    public ImageListPresenterImpl(RetrofitService retrofitService,
+                                  Constants constants,
+                                  Utils utils,
+                                  CompositeDisposable compositeDisposable)
+    {
         this.retrofitService = retrofitService;
         this.constants = constants;
         this.utils = utils;
+        this.compositeDisposable = compositeDisposable;
     }
 
     @Override
     public void attachView(ImageListView view) {
         super.attachView(view);
-        requestUpdate();
+        requestListUpdate();
+        requestHeaderUpdate();
     }
 
     @Override
     public void detachView() {
         super.detachView();
-        compositeDisposable.dispose();
+        compositeDisposable.clear(); // 3 часа убито на понимание того, что dispose != clear
     }
 
     @Override
-    public void requestUpdate() {
-        ifViewAttached(__ ->
+    public void requestListUpdate() {
+        ifViewAttached(view ->
         {
             compositeDisposable.add(
             retrofitService
@@ -56,15 +61,20 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            data -> getView().updateData(utils.mapInstaDataToURIList(data)),
+                            data -> view.updateList(utils.mapInstaDataToURIList(data)),
                             error -> Log.i(TAG,error.toString())));
+        }
+        );
+    }
+    @Override
+    public void requestHeaderUpdate() {
+        ifViewAttached(view -> {
             compositeDisposable.add(retrofitService.getUserLoginData(constants.ACCESS_TOKEN_PUBLIC_SCOPE)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            loginDataResponse -> getView().updateHeader(loginDataResponse.getData()),
+                            loginDataResponse -> view.updateToolbar(loginDataResponse.getData()),
                             throwable -> Log.i(TAG,throwable.toString())));
-        }
-        );
+        });
     }
 }

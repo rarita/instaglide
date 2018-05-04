@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by rarita on 21.04.18.
@@ -18,4 +19,7 @@ public class UnscopedModule {
     {
         return LayoutInflater.from(context);
     }
+    @NonNull
+    @Provides
+    CompositeDisposable provideCompositeDisposable(){return new CompositeDisposable(); }
 }

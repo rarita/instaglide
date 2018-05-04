@@ -7,5 +7,6 @@ import com.hannesdorfmann.mosby3.mvp.MvpPresenter;
  */
 
 public interface ImageListPresenter extends MvpPresenter<ImageListView> {
-    void requestUpdate();
+    void requestListUpdate();
+    void requestHeaderUpdate();
 }

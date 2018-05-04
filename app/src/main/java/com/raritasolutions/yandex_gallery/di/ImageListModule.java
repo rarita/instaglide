@@ -15,6 +15,7 @@ import com.raritasolutions.yandex_gallery.ui.image_list.ImageListPresenterImpl;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by rarita on 21.04.18.
@@ -26,9 +27,12 @@ public class ImageListModule {
     @Provides
     @NonNull
     @ImageListScope
-    ImageListPresenterImpl provideImageListPresenter(RetrofitService retrofitService, Constants constants, Utils utils)
+    ImageListPresenterImpl provideImageListPresenter(RetrofitService retrofitService,
+                                                     Constants constants,
+                                                     Utils utils,
+                                                     CompositeDisposable compositeDisposable)
     {
-        return new ImageListPresenterImpl(retrofitService, constants, utils);
+        return new ImageListPresenterImpl(retrofitService, constants, utils, compositeDisposable);
     }
     @Provides
     @NonNull

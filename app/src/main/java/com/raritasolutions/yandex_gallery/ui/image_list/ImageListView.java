@@ -10,6 +10,6 @@ import java.util.List;
  */
 
 public interface ImageListView extends MvpView {
-    void updateData(List<String> images);
-    void updateHeader(LoginData loginData);
+    void updateList(List<String> images);
+    void updateToolbar(LoginData loginData);
 }

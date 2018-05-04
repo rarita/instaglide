@@ -87,7 +87,7 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     }
 
     @Override
-    public void updateData(List<String> images) {
+    public void updateList(List<String> images) {
 
         if (imageListAdapter != null)
         {
@@ -97,7 +97,7 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     }
 
     @Override
-    public void updateHeader(LoginData loginData) {
+    public void updateToolbar(LoginData loginData) {
         if (toolbarViewHolder.isBound())
             toolbarViewHolder.bindData(loginData);
     }

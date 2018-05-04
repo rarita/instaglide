@@ -7,6 +7,6 @@ import java.util.List;
  * Created by rarita on 03.05.18.
  */
 
-public class SessionData {
+public class Repo {
     public static List<String> images = new ArrayList<>();
 }
