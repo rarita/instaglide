@@ -4,12 +4,15 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.raritasolutions.yandex_gallery.model.Dimensions;
 import com.raritasolutions.yandex_gallery.model.InstaData;
 import com.raritasolutions.yandex_gallery.model.Response;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 
 /**
@@ -18,8 +21,10 @@ import java.util.List;
 
 public class Utils {
     private final String TAG = Utils.class.getSimpleName();
-    private Constants constants;
+    DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
 
+    private Constants constants;
+    @Inject
     public Utils(Constants constants)
     {
         this.constants = constants;
@@ -37,11 +42,14 @@ public class Utils {
         }
         return result;
     }
-    // Т.к. фото в Инстаграме квадратные, возвращает одновременно ширину и высоту одной фотки в списке.
-    public int getItemDimensions() {
-        DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+    // Т.к. фото в Инстаграме квадратные (почти все), возвращает одновременно ширину и высоту одной фотки в списке.
+    public int getItemDimensions()
+    {
         return displayMetrics.widthPixels / constants.COLUMN_COUNT;
     }
-
+    public Dimensions getScreenDimensions()
+    {
+        return new Dimensions(displayMetrics.widthPixels,displayMetrics.heightPixels);
+    }
 
 }

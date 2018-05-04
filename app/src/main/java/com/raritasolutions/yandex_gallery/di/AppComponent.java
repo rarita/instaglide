@@ -1,5 +1,6 @@
 package com.raritasolutions.yandex_gallery.di;
 
+import com.raritasolutions.yandex_gallery.ui.LoginActivity;
 import com.raritasolutions.yandex_gallery.ui.MainActivity;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListFragment;
 
@@ -15,4 +16,5 @@ import dagger.Component;
 public interface AppComponent {
     ImageListComponent imageListComponent(ImageListModule imageListModule);
     void inject(MainActivity mainActivity);
+    void inject(LoginActivity loginActivity);
 }
