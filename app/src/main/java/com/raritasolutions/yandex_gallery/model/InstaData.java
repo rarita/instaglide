@@ -6,51 +6,42 @@ package com.raritasolutions.yandex_gallery.model;
 
 public class InstaData {
 
-    private Images images;
-    private User user;
+    public final Images images;
+    public final User user;
 
-    public Images getImages() {
-        return images;
-    }
-
-    public User getUser() {
-        return user;
+    public InstaData(Images images, User user) {
+        this.images = images;
+        this.user = user;
     }
 
     public class User {
 
-        private String profile_picture;
-        private String user_name;
+        public final String profile_picture;
+        public final String user_name;
 
-        public String getProfile_picture() {
-            return profile_picture;
-        }
-
-        public String getUser_name() {
-            return user_name;
+        public User(String profile_picture, String user_name) {
+            this.profile_picture = profile_picture;
+            this.user_name = user_name;
         }
     }
 
     public class Images {
 
-        private resolution thumbnail; //150x150
-        private resolution low_resolution; //320x320
-        private resolution standard_resolution; //640x640
+        public final resolution thumbnail; //150x150
+        public final resolution low_resolution; //320x320
+        public final resolution standard_resolution; //640x640
 
-        public resolution getStandard_resolution() {
-            return standard_resolution;
-        }
-
-        public resolution getThumbnail() { return thumbnail; }
-
-        public resolution getLow_resolution() {
-            return low_resolution;
+        public Images(resolution thumbnail, resolution low_resolution, resolution standard_resolution) {
+            this.thumbnail = thumbnail;
+            this.low_resolution = low_resolution;
+            this.standard_resolution = standard_resolution;
         }
 
         public class resolution {
-            private String url;
-            public String getUrl() {
-                return url;
+            public final String url;
+
+            public resolution(String url) {
+                this.url = url;
             }
         }
 

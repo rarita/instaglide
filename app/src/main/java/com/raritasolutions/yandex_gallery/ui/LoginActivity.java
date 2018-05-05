@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         GlideApp.with(context)
                 .load(R.drawable.stars2)
                 .centerCrop()
-                .into(new SimpleTarget<Drawable>(dim.getWidth(),dim.getHeight()) {
+                .into(new SimpleTarget<Drawable>(dim.width,dim.height) {
                     @Override
                     public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
                         loginContainer.setBackground(resource);

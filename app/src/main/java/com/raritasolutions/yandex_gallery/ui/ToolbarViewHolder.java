@@ -89,14 +89,14 @@ public class ToolbarViewHolder {
 
     public void bindData(LoginData loginData)
     {
-        username.setText(loginData.getUsername());
-        fullname.setText(loginData.getFull_name());
-        final Counts counts = loginData.getCounts();
-        media_count.setText(counts.getMedia());
-        followers_count.setText(counts.getFollowed_by());
-        following_count.setText(counts.getFollows());
+        username.setText(loginData.username);
+        fullname.setText(loginData.full_name);
+        final Counts counts = loginData.counts;
+        media_count.setText(counts.media);
+        followers_count.setText(counts.followed_by);
+        following_count.setText(counts.follows);
         Glide.with(context)
-                .load(loginData.getProfile_picture())
+                .load(loginData.profile_picture)
                 .into(profile_pic);
     }
 }

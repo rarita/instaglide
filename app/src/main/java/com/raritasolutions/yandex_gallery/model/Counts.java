@@ -5,17 +5,13 @@ package com.raritasolutions.yandex_gallery.model;
  */
 
 public class Counts {
-    private String media;
-    private String follows;
-    private String followed_by;
+    public final String media;
+    public final String follows;
+    public final String followed_by;
 
-    public String getMedia() {
-        return media;
+    public Counts(String media, String follows, String followed_by) {
+        this.media = media;
+        this.follows = follows;
+        this.followed_by = followed_by;
     }
-
-    public String getFollows() {
-        return follows;
-    }
-
-    public String getFollowed_by() {return followed_by;}
 }

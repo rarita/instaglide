@@ -8,22 +8,11 @@ package com.raritasolutions.yandex_gallery.model;
 В общем случае инста возвращает ответ вида pagination/meta/data
 Первый массив нам не нужен, данных не так много для постраничной прогрузки. */
 public class Response<T> {
-    private T data;
-    private Meta meta;
+    public final T data;
+    public final Meta meta;
 
-    public T getData() {
-            return data;
-        }
-
-    public void setData(T data) {
-            this.data = data;
-        }
-
-    public Meta getMeta() {
-        return meta;
-    }
-
-    public void setMeta(Meta meta) {
+    public Response(T data, Meta meta) {
+        this.data = data;
         this.meta = meta;
     }
 }

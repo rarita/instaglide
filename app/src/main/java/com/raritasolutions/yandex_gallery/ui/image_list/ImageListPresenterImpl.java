@@ -73,7 +73,7 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
-                            loginDataResponse -> view.updateToolbar(loginDataResponse.getData()),
+                            loginDataResponse -> view.updateToolbar(loginDataResponse.data),
                             throwable -> Log.i(TAG,throwable.toString())));
         });
     }

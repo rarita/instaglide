@@ -34,11 +34,11 @@ public class Utils {
     {
         // стримами это дело организовать не удалось
         // надо обдумать и ещё раз попробовать
-        InstaData[] data = response.getData();
+        InstaData[] data = response.data;
         Log.i(TAG, String.valueOf(data.length));
         List<String> result = new ArrayList<>();
         for (InstaData item:data) {
-            result.add(item.getImages().getStandard_resolution().getUrl());
+            result.add(item.images.standard_resolution.url);
         }
         return result;
     }

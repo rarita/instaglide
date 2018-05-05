@@ -5,22 +5,19 @@ package com.raritasolutions.yandex_gallery.model;
  */
 
 public class LoginData {
-    private String username;
-    private String profile_picture;
-    private String full_name;
-    private String bio;
-    private String website;
-    private Counts counts;
+    public final String username;
+    public final String profile_picture;
+    public final String full_name;
+    public final String bio;
+    public final String website;
+    public final Counts counts;
 
-    public String getUsername() {return username;}
-
-    public String getProfile_picture() {return profile_picture;}
-
-    public String getFull_name() {return full_name;}
-
-    public String getBio() {return bio;}
-
-    public String getWebsite() {return website;}
-
-    public Counts getCounts() {return counts;}
+    public LoginData(String username, String profile_picture, String full_name, String bio, String website, Counts counts) {
+        this.username = username;
+        this.profile_picture = profile_picture;
+        this.full_name = full_name;
+        this.bio = bio;
+        this.website = website;
+        this.counts = counts;
+    }
 }

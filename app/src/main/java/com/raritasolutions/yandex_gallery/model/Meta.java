@@ -5,9 +5,9 @@ package com.raritasolutions.yandex_gallery.model;
  */
 
 public class Meta {
-    private int code;
+    public final int code;
 
-    public int getCode() {
-        return code;
+    public Meta(int code) {
+        this.code = code;
     }
 }
