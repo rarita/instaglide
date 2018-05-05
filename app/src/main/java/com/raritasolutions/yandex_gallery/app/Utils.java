@@ -21,20 +21,20 @@ import javax.inject.Inject;
 
 public class Utils {
     private final String TAG = Utils.class.getSimpleName();
-    DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+    private final DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
 
-    private Constants constants;
+    private final Constants constants;
     @Inject
     public Utils(Constants constants)
     {
         this.constants = constants;
     }
 
-    public List<String> mapInstaDataToURIList(Response<InstaData[]> response)
+    public List<String> mapInstaDataToURIList(InstaData[] data)
     {
         // стримами это дело организовать не удалось
         // надо обдумать и ещё раз попробовать
-        InstaData[] data = response.data;
+        //InstaData[] data = response.data;
         Log.i(TAG, String.valueOf(data.length));
         List<String> result = new ArrayList<>();
         for (InstaData item:data) {

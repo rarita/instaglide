@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
+import com.raritasolutions.yandex_gallery.app.Repo;
 import com.raritasolutions.yandex_gallery.app.Utils;
 import com.raritasolutions.yandex_gallery.ui.ToolbarViewHolder;
 import com.raritasolutions.yandex_gallery.ui.image_list.GridSpacingItemDecoration;
@@ -30,9 +31,10 @@ public class ImageListModule {
     ImageListPresenterImpl provideImageListPresenter(RetrofitService retrofitService,
                                                      Constants constants,
                                                      Utils utils,
-                                                     CompositeDisposable compositeDisposable)
+                                                     CompositeDisposable compositeDisposable,
+                                                     Repo repo)
     {
-        return new ImageListPresenterImpl(retrofitService, constants, utils, compositeDisposable);
+        return new ImageListPresenterImpl(retrofitService, constants, utils, compositeDisposable,repo);
     }
     @Provides
     @NonNull

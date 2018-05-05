@@ -3,7 +3,10 @@ package com.raritasolutions.yandex_gallery.di;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.raritasolutions.yandex_gallery.LocalDAO;
+import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
+import com.raritasolutions.yandex_gallery.app.Repo;
 import com.raritasolutions.yandex_gallery.app.Utils;
 
 import javax.inject.Named;
@@ -34,10 +37,16 @@ public class AppModule {
     @NonNull
     @Provides
     @Singleton
-    Constants provideConstants() {return new Constants(); }
+    Constants provideConstants() {return new Constants();}
     @NonNull
     @Provides
     @Singleton
     Utils provideUtils(Constants constants) {return new Utils(constants); }
+    @NonNull
+    @Provides
+    @Singleton
+    Repo provideRepo(RetrofitService retrofitService, Constants constants, LocalDAO localDAO){
+        return new Repo(retrofitService,localDAO,constants);
+    }
 
 }

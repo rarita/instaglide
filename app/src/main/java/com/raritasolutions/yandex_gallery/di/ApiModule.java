@@ -1,10 +1,14 @@
 package com.raritasolutions.yandex_gallery.di;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.raritasolutions.yandex_gallery.AppDatabase;
+import com.raritasolutions.yandex_gallery.LocalDAO;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
 
@@ -31,5 +35,11 @@ public class ApiModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build().create(RetrofitService.class);
     }
-
+    @Provides
+    @NonNull
+    @Singleton
+    LocalDAO provideLocalDAO(Context context)
+    {
+       return Room.databaseBuilder(context, AppDatabase.class,AppDatabase.DB_NAME).build().localDAO();
+    }
 }
