@@ -9,11 +9,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.raritasolutions.yandex_gallery.R;
-import com.raritasolutions.yandex_gallery.app.Preferences;
 import com.raritasolutions.yandex_gallery.model.Counts;
-import com.raritasolutions.yandex_gallery.model.Dimensions;
 import com.raritasolutions.yandex_gallery.model.LoginData;
-import com.raritasolutions.yandex_gallery.ui.image_list.ImageListView;
 
 import javax.inject.Inject;
 
@@ -24,7 +21,7 @@ import butterknife.Unbinder;
 /**
  * Created by rarita on 03.05.18.
  */
-// По хорошему сдел
+// Вытащено в отдельный класс, чтобы не мозолить глаза в Activity.
 public class ToolbarViewHolder {
     // Контекст для Glide (инъекция)
     private final Context context;

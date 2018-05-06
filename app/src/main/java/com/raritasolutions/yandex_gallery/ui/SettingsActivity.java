@@ -33,12 +33,14 @@ import io.reactivex.schedulers.Schedulers;
 
 public class SettingsActivity extends AppCompatActivity {
 
+    // Данная вьюха также отлично справляется без презентера, храня все нужное в Preferences.
     private final String TAG = SettingsActivity.class.getSimpleName();
     private enum Reference {
         PORTRAIT_SPAN,
         PORTRAIT_SPACING,
         LANDSCAPE_SPAN,
-        LANDSCAPE_SPACING};
+        LANDSCAPE_SPACING
+    };
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Unbinder unbinder;
 

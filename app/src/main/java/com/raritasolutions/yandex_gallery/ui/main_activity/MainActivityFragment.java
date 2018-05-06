@@ -1,4 +1,4 @@
-package com.raritasolutions.yandex_gallery.ui;
+package com.raritasolutions.yandex_gallery.ui.main_activity;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.raritasolutions.yandex_gallery.ui;
+package com.raritasolutions.yandex_gallery.ui.main_activity;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
