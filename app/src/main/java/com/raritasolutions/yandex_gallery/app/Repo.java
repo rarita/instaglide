@@ -39,6 +39,13 @@ public class Repo {
         return localDAO
                 .getPreferences();
     }
+    public void storePreferences(Preferences preferences)
+    {
+        Completable.fromAction(() -> localDAO.insertPreferences(preferences))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> Log.i(TAG,"Preferences stored"));
+    }
     public Observable<LoginData> getLoginData()
     {
         // Установка внутри concat subscribeOn спасает от выбивания Observable ошибками API

@@ -12,40 +12,34 @@ import javax.annotation.Nullable;
 @Entity(tableName = "table_prefs")
 public class Preferences {
     @PrimaryKey
-    private int id;
+    private int id = 0; // по дефолту для БД
     private int column_count_portrait;
     private int column_count_landscape;
     private int spacing_portrait;
     private int spacing_landscape;
-    private String current_username = null;
 
-    // В константах дефолтные значения параметров
-    private final Constants constants;
 
-    public Preferences(Constants constants) {
-        this.constants = constants;
-        id = 0;
-        pullDefaultValues();
+    public Preferences() {
     }
 
-    public void fromPreferences(Preferences preferences)
+    public Preferences fromPreferences(Preferences preferences)
     {
         column_count_portrait = preferences.getColumn_count_portrait();
         column_count_landscape = preferences.getColumn_count_landscape();
         spacing_portrait = preferences.getSpacing_portrait();
         spacing_landscape = preferences.getSpacing_landscape();
-        current_username = preferences.getCurrent_username();
+        return this;
     }
 
-    public void pullDefaultValues()
+    public Preferences fromConstants(Constants constants)
     {
         column_count_portrait = constants.COLUMN_COUNT;
         column_count_landscape = constants.COLUMN_COUNT * 2;
         spacing_portrait = constants.LIST_SPACING;
         spacing_landscape = constants.LIST_SPACING * 2;
+        return this;
     }
     // Геттеры - сеттеры
-
     public int getId() {
         return id;
     }
@@ -81,13 +75,5 @@ public class Preferences {
 
     public void setSpacing_landscape(int spacing_landscape) {
         this.spacing_landscape = spacing_landscape;
-    }
-    @Nullable
-    public String getCurrent_username() {
-        return current_username;
-    }
-
-    public void setCurrent_username(String current_username) {
-        this.current_username = current_username;
     }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.raritasolutions.yandex_gallery.R;
+import com.raritasolutions.yandex_gallery.app.Preferences;
 import com.raritasolutions.yandex_gallery.model.Counts;
 import com.raritasolutions.yandex_gallery.model.Dimensions;
 import com.raritasolutions.yandex_gallery.model.LoginData;
@@ -27,6 +28,7 @@ import butterknife.Unbinder;
 public class ToolbarViewHolder {
     // Контекст для Glide (инъекция)
     private final Context context;
+    private String user;
     private Unbinder unbinder;
     // Физические тулбары
     @BindView(R.id.collapsingToolbarLayout)
@@ -61,6 +63,10 @@ public class ToolbarViewHolder {
         disableTitleScaling();
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     private void disableTitleScaling()
     {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -73,7 +79,7 @@ public class ToolbarViewHolder {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbarLayout.setTitle("Title");
+                    collapsingToolbarLayout.setTitle("Instaglide: " + user);
                     isShow = true;
                 } else if(isShow) {
                     collapsingToolbarLayout.setTitle(" ");

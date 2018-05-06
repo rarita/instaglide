@@ -26,12 +26,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.disposables.CompositeDisposable;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class LoginActivity extends AppCompatActivity {
 
     private Unbinder unbinder;
-
     @BindView(R.id.login_container)
     ConstraintLayout loginContainer;
 
@@ -69,6 +69,12 @@ public class LoginActivity extends AppCompatActivity {
     {
         // Подождем сеть перед тем как показать MainActivity.
         Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
+    @OnClick(R.id.button_settings)
+    void openSettings()
+    {
+        Intent intent = new Intent(this,SettingsActivity.class);
         startActivity(intent);
     }
 

@@ -124,8 +124,10 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
 
     @Override
     public void updateToolbar(LoginData loginData) {
-        if (toolbarViewHolder.isBound())
+        if (toolbarViewHolder.isBound()) {
+            toolbarViewHolder.setUser(loginData.username);
             toolbarViewHolder.bindData(loginData);
+        }
     }
 
 }

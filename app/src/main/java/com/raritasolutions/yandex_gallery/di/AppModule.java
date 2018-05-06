@@ -52,6 +52,6 @@ public class AppModule {
     @NonNull
     @Provides
     @Singleton
-    Preferences providePreferences(Constants constants) {return new Preferences(constants);}
+    Preferences providePreferences(Constants constants) {return new Preferences().fromConstants(constants);}
 
 }

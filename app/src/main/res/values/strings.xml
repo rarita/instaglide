@@ -2,11 +2,19 @@
     <string name="app_name">Instaglide</string>
     <string name="action_settings">Settings</string>
     <string name="default_q">42</string>  <!-- the answer to all questions !-->
-    <string name="default_username">.@username</string>
-    <string name="default_fullname">Ivan</string>
+    <string name="default_username">username</string>
+    <string name="default_fullname">User</string>
+    <string name="default_spancount">3</string>
+    <string name="default_spacing">2</string>
     <string name="text_posts">posts</string>
     <string name="text_followers">followers</string>
     <string name="text_following">following</string>
+    <string name="text_portrait_mode">Portrait mode</string>
+    <string name="text_landscape_mode">Landscape mode</string>
+    <string name="text_grid_settings">Image grid settings</string>
+    <string name="text_span_count">Items in a row (min: 1; max: 10)</string>
+    <string name="text_spacing">Space between items (in DP)</string>
     <string name="text_greeting">An app that allows you to browse your IG page like no app does!</string>
     <string name="button_demo">Log into demo account</string>
+    <string name="title_activity_settings">Settings</string>
 </resources>
