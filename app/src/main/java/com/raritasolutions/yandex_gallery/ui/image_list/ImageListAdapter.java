@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.raritasolutions.yandex_gallery.R;
 import com.raritasolutions.yandex_gallery.app.Utils;
+import com.raritasolutions.yandex_gallery.model.Dimensions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     public ImageListAdapter(LayoutInflater inflater, Context context, Utils utils) {
         this.inflater = inflater;
         this.context = context;
-        this.imageDimensions = utils.getItemDimensions();
+        this.imageDimensions = utils.getItemDimensions(3); // Дефолтное значение
     }
 
     @Override
@@ -41,7 +42,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     {
         mValues = images;
     }
-
+    public void setItemDimensions(int dimensions){this.imageDimensions = dimensions;}
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         String mItem = mValues.get(position);

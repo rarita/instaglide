@@ -21,13 +21,16 @@ import javax.inject.Inject;
 
 public class Utils {
     private final String TAG = Utils.class.getSimpleName();
-    private final DisplayMetrics displayMetrics = Resources.getSystem().getDisplayMetrics();
+    private DisplayMetrics displayMetrics;
 
-    private final Constants constants;
     @Inject
     public Utils(Constants constants)
     {
-        this.constants = constants;
+        updateMetrics();
+    }
+    public void updateMetrics()
+    {
+        displayMetrics = Resources.getSystem().getDisplayMetrics();
     }
 
     public List<String> mapInstaDataToURIList(InstaData[] data)
@@ -43,9 +46,9 @@ public class Utils {
         return result;
     }
     // Т.к. фото в Инстаграме квадратные (почти все), возвращает одновременно ширину и высоту одной фотки в списке.
-    public int getItemDimensions()
+    public int getItemDimensions(int itemCount)
     {
-        return displayMetrics.widthPixels / constants.COLUMN_COUNT;
+        return displayMetrics.widthPixels / itemCount;
     }
     public Dimensions getScreenDimensions()
     {

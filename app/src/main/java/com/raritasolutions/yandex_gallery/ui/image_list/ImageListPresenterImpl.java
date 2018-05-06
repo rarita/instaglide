@@ -53,9 +53,7 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
     public void requestListUpdate() {
         ifViewAttached(view ->
                 {
-                    compositeDisposable.add(
-                            repo
-                                    .getInstaData()
+                    compositeDisposable.add(repo.getInstaData()
                                     .subscribe(
                                             data -> view.updateList(utils.mapInstaDataToURIList(data)),
                                             error -> Log.i(TAG,error.toString())));
@@ -66,8 +64,6 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
     public void requestHeaderUpdate() {
         ifViewAttached(view -> {
             compositeDisposable.add(repo.getLoginData()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                             loginDataResponse -> view.updateToolbar(loginDataResponse),
                             throwable -> Log.i(TAG,throwable.toString())));

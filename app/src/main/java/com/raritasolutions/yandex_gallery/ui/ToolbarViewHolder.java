@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.raritasolutions.yandex_gallery.R;
 import com.raritasolutions.yandex_gallery.model.Counts;
+import com.raritasolutions.yandex_gallery.model.Dimensions;
 import com.raritasolutions.yandex_gallery.model.LoginData;
 import com.raritasolutions.yandex_gallery.ui.image_list.ImageListView;
 

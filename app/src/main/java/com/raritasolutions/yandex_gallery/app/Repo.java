@@ -6,17 +6,10 @@ import com.raritasolutions.yandex_gallery.LocalDAO;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.model.InstaData;
 import com.raritasolutions.yandex_gallery.model.LoginData;
-import com.raritasolutions.yandex_gallery.model.Response;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
-import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Scheduler;
@@ -30,9 +23,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class Repo {
     private final String TAG = Repo.class.getSimpleName();
-    private List<String> images = new ArrayList<>();
-    private Response<InstaData> dataResponse;
-    private Response<LoginData> loginResponse;
     // Injectable
     private final RetrofitService retrofitService;
     private final LocalDAO localDAO;
@@ -44,15 +34,20 @@ public class Repo {
         this.localDAO = localDAO;
         this.constants = constants;
     }
-
+    public Maybe<Preferences> getPreferences()
+    {
+        return localDAO
+                .getPreferences();
+    }
     public Observable<LoginData> getLoginData()
     {
         // Установка внутри concat subscribeOn спасает от выбивания Observable ошибками API
-        return Observable.concat(
-                getLoginDataFromDB().toObservable().subscribeOn(Schedulers.io()),
-                getLoginDataFromAPI().toObservable().subscribeOn(Schedulers.io()))
+        return Observable
+                .mergeDelayError(
+                        getLoginDataFromDB().toObservable().subscribeOn(Schedulers.io()),
+                        getLoginDataFromAPI().toObservable().subscribeOn(Schedulers.io()))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread(),true);
     }
     private Single<LoginData> getLoginDataFromAPI()
     {
@@ -79,11 +74,11 @@ public class Repo {
     }
     public Observable<InstaData[]> getInstaData()
     {
-        return Observable.concat(
+        return Observable.mergeDelayError(
                 getInstaDataFromDB().toObservable().subscribeOn(Schedulers.io()),
                 getInstaDataFromAPI().toObservable().subscribeOn(Schedulers.io()))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                .observeOn(AndroidSchedulers.mainThread(),true);
     }
     private Single<InstaData[]> getInstaDataFromAPI()
     {

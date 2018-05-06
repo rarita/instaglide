@@ -1,6 +1,7 @@
 package com.raritasolutions.yandex_gallery.ui.image_list;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +26,8 @@ import com.bumptech.glide.request.transition.Transition;
 import com.hannesdorfmann.mosby3.mvp.MvpFragment;
 import com.raritasolutions.yandex_gallery.R;
 import com.raritasolutions.yandex_gallery.app.App;
+import com.raritasolutions.yandex_gallery.app.Preferences;
+import com.raritasolutions.yandex_gallery.app.Utils;
 import com.raritasolutions.yandex_gallery.di.ImageListModule;
 import com.raritasolutions.yandex_gallery.model.Counts;
 import com.raritasolutions.yandex_gallery.model.LoginData;
@@ -50,6 +54,10 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     ImageListAdapter imageListAdapter;
     @Inject
     GridSpacingItemDecoration decoration;
+    @Inject
+    Preferences preferences;
+    @Inject
+    Utils utils;
 
     public ImageListFragment() {
         App.getInstance().getAppComponent().imageListComponent(new ImageListModule()).inject(this);
@@ -69,6 +77,24 @@ public class ImageListFragment extends MvpFragment<ImageListView,ImageListPresen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_image_list, container, false);
+        // Set span count and spacing depending on orientation of the device
+        final int itemCount;
+        final int listSpacing;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            itemCount = preferences.getColumn_count_portrait();
+            listSpacing = preferences.getSpacing_portrait();
+        }
+        else
+        {
+            itemCount = preferences.getColumn_count_landscape();
+            listSpacing = preferences.getSpacing_landscape();
+        }
+        gridLayoutManager.setSpanCount(itemCount);
+        decoration.setSpanCount(itemCount);
+        decoration.setSpacing(listSpacing);
+        utils.updateMetrics();
+        imageListAdapter.setItemDimensions(utils.getItemDimensions(itemCount));
         // Set the adapter
         if (view instanceof RecyclerView) {
             RecyclerView recyclerView = (RecyclerView) view;

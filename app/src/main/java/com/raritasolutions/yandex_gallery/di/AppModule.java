@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import com.raritasolutions.yandex_gallery.LocalDAO;
 import com.raritasolutions.yandex_gallery.RetrofitService;
 import com.raritasolutions.yandex_gallery.app.Constants;
+import com.raritasolutions.yandex_gallery.app.Preferences;
 import com.raritasolutions.yandex_gallery.app.Repo;
 import com.raritasolutions.yandex_gallery.app.Utils;
 
@@ -48,5 +49,9 @@ public class AppModule {
     Repo provideRepo(RetrofitService retrofitService, Constants constants, LocalDAO localDAO){
         return new Repo(retrofitService,localDAO,constants);
     }
+    @NonNull
+    @Provides
+    @Singleton
+    Preferences providePreferences(Constants constants) {return new Preferences(constants);}
 
 }

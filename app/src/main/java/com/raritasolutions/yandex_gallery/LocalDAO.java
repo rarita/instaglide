@@ -5,9 +5,11 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
+import com.raritasolutions.yandex_gallery.app.Preferences;
 import com.raritasolutions.yandex_gallery.model.InstaData;
 import com.raritasolutions.yandex_gallery.model.LoginData;
 
+import dagger.multibindings.IntoSet;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
@@ -24,6 +26,12 @@ public interface LocalDAO {
 
     @Query("SELECT * FROM table_data")
     Maybe<InstaData[]> getInstaData();
+
+    @Query("SELECT * FROM table_prefs")
+    Maybe<Preferences> getPreferences();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertPreferences(Preferences preferences);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLoginData(LoginData loginData);

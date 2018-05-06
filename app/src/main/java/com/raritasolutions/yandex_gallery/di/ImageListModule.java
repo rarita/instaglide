@@ -51,9 +51,9 @@ public class ImageListModule {
     @Provides
     @NonNull
     @ImageListScope
-    GridSpacingItemDecoration provideGridSpacingItemDecoration(Constants constants)
+    GridSpacingItemDecoration provideGridSpacingItemDecoration()
     {
-        return new GridSpacingItemDecoration(constants.COLUMN_COUNT,constants.LIST_SPACING,false,0);
+        return new GridSpacingItemDecoration(false,0);
     }
     @Provides
     @NonNull
