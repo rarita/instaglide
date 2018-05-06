@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="com.raritasolutions.yandex_gallery.ui.zoomed_activity.ZoomedImageView">
+    tools:context="com.raritasolutions.instaglide.ui.zoomed_activity.ZoomedImageView">
 
     <ImageView
         android:id="@+id/image_zoomed"
