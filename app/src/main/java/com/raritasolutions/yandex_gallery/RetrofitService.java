@@ -17,12 +17,13 @@ import retrofit2.http.Query;
  */
 
 public interface RetrofitService {
+    // API никогда не пришлет пустого значения, поэтому резонно использовать Single
     @GET("v1/users/self")
-    Flowable<Response<LoginData>> getUserLoginData(@Query("access_token") String access_token);
+    Single<Response<LoginData>> getUserLoginData(@Query("access_token") String access_token);
 
     @GET("v1/tags/{tag_name}/media/recent")
-    Flowable<Response<InstaData[]>> getTagPhotos(@Path("tag_name") String tag_name,
+    Single<Response<InstaData[]>> getTagPhotos(@Path("tag_name") String tag_name,
                                                @Query("access_token") String access_token);
     @GET("v1/users/self/media/recent")
-    Flowable<Response<InstaData[]>> getUserPhotos(@Query("access_token") String access_token);
+    Single<Response<InstaData[]>> getUserPhotos(@Query("access_token") String access_token);
 }

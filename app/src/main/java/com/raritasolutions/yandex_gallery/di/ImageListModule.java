@@ -28,13 +28,11 @@ public class ImageListModule {
     @Provides
     @NonNull
     @ImageListScope
-    ImageListPresenterImpl provideImageListPresenter(RetrofitService retrofitService,
-                                                     Constants constants,
-                                                     Utils utils,
+    ImageListPresenterImpl provideImageListPresenter(Utils utils,
                                                      CompositeDisposable compositeDisposable,
                                                      Repo repo)
     {
-        return new ImageListPresenterImpl(retrofitService, constants, utils, compositeDisposable,repo);
+        return new ImageListPresenterImpl(utils, compositeDisposable,repo);
     }
     @Provides
     @NonNull

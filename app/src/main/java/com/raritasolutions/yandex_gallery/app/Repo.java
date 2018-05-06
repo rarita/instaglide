@@ -45,22 +45,21 @@ public class Repo {
         this.constants = constants;
     }
 
-    public Flowable<LoginData> getLoginData()
+    public Observable<LoginData> getLoginData()
     {
-        return Flowable.merge(
-                getLoginDataFromDB(),
-                getLoginDataFromAPI())
+        // Установка внутри concat subscribeOn спасает от выбивания Observable ошибками API
+        return Observable.concat(
+                getLoginDataFromDB().toObservable().subscribeOn(Schedulers.io()),
+                getLoginDataFromAPI().toObservable().subscribeOn(Schedulers.io()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-                //.debounce(400, TimeUnit.MILLISECONDS); // Если API отвечает быстро, дропаем ответ БД во избежание дерганья UI.
     }
-    private Flowable<LoginData> getLoginDataFromAPI()
+    private Single<LoginData> getLoginDataFromAPI()
     {
         // Если API вернул православный code == 200, пишем в БД ответ, если нет, ругаемся
-
         return retrofitService
                 .getUserLoginData(constants.ACCESS_TOKEN_PUBLIC_SCOPE)
-                .doOnNext(dataFromAPI ->
+                .doOnSuccess(dataFromAPI ->
                 {
                     if (dataFromAPI.meta.code == 200) {
                         storeLoginData(dataFromAPI.data);
@@ -71,26 +70,26 @@ public class Repo {
                 .map(dataResponse -> dataResponse.data);
     }
 
-    private Flowable<LoginData> getLoginDataFromDB()
+    private Maybe<LoginData> getLoginDataFromDB()
     {
         return localDAO
                 .getLoginData()
                 .filter(dataResponse -> dataResponse.id != "")
-                .doOnNext(__ -> Log.i(TAG,"Login data fetched from DB"));
+                .doOnSuccess(data -> Log.i(TAG,"Login data fetched from DB, id = " + data.username));
     }
-    public Flowable<InstaData[]> getInstaData()
+    public Observable<InstaData[]> getInstaData()
     {
-        return Flowable.merge(
-                 getInstaDataFromDB()
-                ,getInstaDataFromAPI())
+        return Observable.concat(
+                getInstaDataFromDB().toObservable().subscribeOn(Schedulers.io()),
+                getInstaDataFromAPI().toObservable().subscribeOn(Schedulers.io()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
-    private Flowable<InstaData[]> getInstaDataFromAPI()
+    private Single<InstaData[]> getInstaDataFromAPI()
     {
         return retrofitService
                 .getUserPhotos(constants.ACCESS_TOKEN_PUBLIC_SCOPE)
-                .doOnNext(dataResponse ->
+                .doOnSuccess(dataResponse ->
                 {
                     if (dataResponse.meta.code == 200) {
                         storeInstaData(dataResponse.data);
@@ -100,14 +99,13 @@ public class Repo {
                 })
                 .map(dataResponse -> dataResponse.data);
     }
-    private Flowable<InstaData[]> getInstaDataFromDB()
+    private Maybe<InstaData[]> getInstaDataFromDB()
     {
         return localDAO
                 .getInstaData()
                 .filter(dataResponse -> dataResponse.length > 0)
-                .doOnNext(dataFromDB -> Log.i(TAG,"Instagram data fetched from DB, its size = " + dataFromDB.length));
+                .doOnSuccess(dataFromDB -> Log.i(TAG,"Instagram data fetched from DB, its size = " + dataFromDB.length));
     }
-
     private void storeLoginData(LoginData loginData)
     {
        Completable.fromAction(() -> localDAO.insertLoginData(loginData))

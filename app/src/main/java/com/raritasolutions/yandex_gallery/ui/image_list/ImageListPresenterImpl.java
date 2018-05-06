@@ -23,20 +23,14 @@ public class ImageListPresenterImpl extends MvpBasePresenter<ImageListView> impl
     private static final String TAG = ImageListPresenterImpl.class.getSimpleName();
     // Это все инжектим
     private final CompositeDisposable compositeDisposable;
-    private final RetrofitService retrofitService;
-    private final Constants constants;
     private final Utils utils;
     private final Repo repo;
 
     @Inject
-    public ImageListPresenterImpl(RetrofitService retrofitService,
-                                  Constants constants,
-                                  Utils utils,
+    public ImageListPresenterImpl(Utils utils,
                                   CompositeDisposable compositeDisposable,
                                   Repo repo)
     {
-        this.retrofitService = retrofitService;
-        this.constants = constants;
         this.utils = utils;
         this.compositeDisposable = compositeDisposable;
         this.repo = repo;

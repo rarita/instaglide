@@ -9,6 +9,7 @@ import com.raritasolutions.yandex_gallery.model.InstaData;
 import com.raritasolutions.yandex_gallery.model.LoginData;
 
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
@@ -19,10 +20,10 @@ import io.reactivex.Single;
 @Dao
 public interface LocalDAO {
     @Query("SELECT * FROM table_login")
-    Flowable<LoginData> getLoginData();
+    Maybe<LoginData> getLoginData();
 
     @Query("SELECT * FROM table_data")
-    Flowable<InstaData[]> getInstaData();
+    Maybe<InstaData[]> getInstaData();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertLoginData(LoginData loginData);
